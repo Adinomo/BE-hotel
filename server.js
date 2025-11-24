@@ -1,10 +1,14 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
 const db = require("./db");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://hotel-g8bq.vercel.app"
+}));
+
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
@@ -52,5 +56,7 @@ app.get("/checkins", (req, res) => {
   });
 });
 
-app.listen(3000, () => console.log("Server berjalan di port 3000"));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log("Server berjalan di port " + PORT));
+
 
